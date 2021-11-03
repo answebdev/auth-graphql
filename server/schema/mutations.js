@@ -26,8 +26,8 @@ const mutation = new GraphQLObjectType({
       // We can also destructure 'args' below:
       //   resolve(parentValue, args, request) {
       resolve(parentValue, { email, password }, req) {
-        // AuthService.signup({email,password,req: request})
-        return AuthService.signup({ email, password, req: req });
+        // AuthService.signup({email, password, req: request})
+        return AuthService.signup({ email, password, req });
       },
     },
   },
