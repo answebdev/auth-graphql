@@ -1,5 +1,5 @@
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLString } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID } = graphql;
 
 const UserType = new GraphQLObjectType({
   // Even though the password is going to be hashed and salted in the database,
@@ -12,6 +12,7 @@ const UserType = new GraphQLObjectType({
   // then maybe you don't want to have the 'email' field here either - everything depends on your application.
   name: 'UserType',
   fields: {
+    id: { type: GraphQLID },
     email: { type: GraphQLString },
   },
 });
