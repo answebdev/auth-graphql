@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
 import AuthForm from './AuthForm';
 import mutation from '../mutations/Login';
-import { graphql } from 'react-apollo';
+import query from '../queries/CurrentUser';
 
 class LoginForm extends Component {
   // Callback that is sent down to the <AuthForm /> component below.
@@ -14,8 +15,10 @@ class LoginForm extends Component {
         email,
         password,
       },
+      refetchQueries: [{ query }],
     });
   }
+
   render() {
     return (
       <div>
