@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { graphql } from 'react-apollo';
 import query from '../queries/CurrentUser';
+import mutation from '../mutations/Logout';
 
 class Header extends Component {
+  // Helper method
+  onLogoutClick() {
+    // Call logout mutation (Note: the actual mutation is in 'mutations/Logout.js' - import it up above)
+    // Wire the Logout mutation up to this component all the way down at the bottom of this file:
+    //export default graphql(mutation)(graphql(query)(Header))
+    // Call the Logout mutation (we're calling an empty object since we're not using query variables):
+    this.props.mutate({});
+  }
+
   renderButtons() {
     // Destructure:
     const { loading, user } = this.props.data;
@@ -16,7 +26,13 @@ class Header extends Component {
 
     // If a user exists - if there is a currently authenticated user, show a Logout button
     if (user) {
-      return <div>Logout</div>;
+      // We use an anchor tag to get the exact same styling used in the li's below,
+      // not because we want to navigate anywhere (in fact, we do NOT want the user to navigate anywhere when clicking this)
+      return (
+        <li>
+          <a onClick={this.onLogoutClick.bind(this)}>Logout</a>
+        </li>
+      );
     } else {
       // If a user does not exist - if there is not a currently authenticated user, show a Login and Signup button
       return (
@@ -50,4 +66,4 @@ class Header extends Component {
   }
 }
 
-export default graphql(query)(Header);
+export default graphql(mutation)(graphql(query)(Header));
