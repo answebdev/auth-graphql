@@ -18,7 +18,7 @@ class AuthForm extends Component {
   }
 
   onSubmit(event) {
-    event.preventDeafult();
+    event.preventDefault();
 
     // Pass in 'email' and 'password' -
     // Because the state object only has 'email' and 'password', and nothing else (see state up above),
