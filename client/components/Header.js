@@ -11,7 +11,15 @@ class Header extends Component {
     // Wire the Logout mutation up to this component all the way down at the bottom of this file:
     //export default graphql(mutation)(graphql(query)(Header))
     // Call the Logout mutation (we're calling an empty object since we're not using query variables):
-    this.props.mutate({});
+    this.props.mutate({
+      // Update component to show user is no longer logged in:
+      // Refresh the component and show Signup and Login buttons.
+      // To do this, use 'refetchQueries' helper with the Logout mutation.
+      // This will automatically refetch out list of queries after running the Logout mutation
+      // (well, we just have one (the CurrentUser query: 'query'), not a list, but we still put this in an array).
+      // The header should now automatically update on the screen:
+      refetchQueries: [{ query: query }],
+    });
   }
 
   renderButtons() {
