@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { graphql } from 'react-apollo';
 import query from '../queries/CurrentUser';
 
@@ -17,8 +18,17 @@ class Header extends Component {
     if (user) {
       return <div>Logout</div>;
     } else {
-      // If a user does not exist - if there is not a currently authenticated user, show a Login button
-      return <div>You're not signed in.</div>;
+      // If a user does not exist - if there is not a currently authenticated user, show a Login and Signup button
+      return (
+        <div>
+          <li>
+            <Link to='/signup'>Signup</Link>
+          </li>
+          <li>
+            <Link to='/login'>Login</Link>
+          </li>
+        </div>
+      );
     }
   }
 
@@ -28,7 +38,13 @@ class Header extends Component {
     // console.log(this.props.data);
     return (
       <nav>
-        <div className='nav-wrapper'>{this.renderButtons()}</div>
+        <div className='nav-wrapper'>
+          <Link to='/' className='brand-logo left'>
+            Home
+          </Link>
+          {/* Note: the li's that go inside this ul are up in the 'renderButtons' function above */}
+          <ul className='right'>{this.renderButtons()}</ul>
+        </div>
       </nav>
     );
   }
