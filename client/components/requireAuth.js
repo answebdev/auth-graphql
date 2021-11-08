@@ -10,6 +10,8 @@ import CurrentUser from '../queries/CurrentUser';
 // since only users who are authenticated are allowed to see the Dashboard page.
 // If our application had other pages that are visible only to users who are authenticated, e.g., Settings or Profile page,
 // then we would also use this HOC in those components (i.e., Settings or Profile components).
+// And then in the routes (index.js), we would wrap those component with the 'requireAuth' HOC
+// the same way we wrap the Dashboard component (see index.js).
 
 // Note: 'componentDidMount' is only called when a component is first rendered on the screen.
 // Note: 'componentWillUpdate' is called every single time that the query updates its state in any fashion.
