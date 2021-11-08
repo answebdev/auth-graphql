@@ -7,6 +7,7 @@ import App from './components/App';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import Dashboard from './components/Dashboard';
+import requireAuth from './components/requireAuth';
 
 // Note on cookies ('createNetworkInterface'):
 // Whereas the GraphiQL tool attaches cookies to a request, GraphQL does NOT attach cookies to a request,
@@ -51,7 +52,7 @@ const Root = () => {
         <Route path='/' component={App}>
           <Route path='/login' component={LoginForm}></Route>
           <Route path='/signup' component={SignupForm}></Route>
-          <Route path='/dashboard' component={Dashboard}></Route>
+          <Route path='/dashboard' component={requireAuth(Dashboard)}></Route>
         </Route>
       </Router>
     </ApolloProvider>
