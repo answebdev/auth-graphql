@@ -17,6 +17,7 @@ class LoginForm extends Component {
     this.state = { errors: [] };
   }
 
+  // REDIRECT TO DASHBOARD AFTER USER IS AUTHENTICATED
   // Whenever component is about to rerender, for any reason, this 'componentWillUpdate' function will be called.
   // 'nextProps' is the props object that will be placed on our component the next time that it rerenders,
   // or as it's just about to update.

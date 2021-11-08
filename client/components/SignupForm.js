@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { hashHistory } from 'react-router';
 import { graphql } from 'react-apollo';
 import AuthForm from './AuthForm';
 import mutation from '../mutations/Signup';
@@ -10,6 +11,17 @@ class SignupForm extends Component {
     super(props);
 
     this.state = { errors: [] };
+  }
+
+  componentWillUpdate(nextProps) {
+    // Compare current set of props with the previous set of props.
+    // If there was not a user currently, but there will be, chances are the user just logged in.
+    // If the incoming set of props has a user, and the previous set of props did not have a user,
+    // the user must have just logged in, so redirect the user to the dashboard page:
+    if (nextProps.data.user && !this.props.data.user) {
+      // Redirect to dashboard - do a forceful redirect:
+      hashHistory.push('/dashboard');
+    }
   }
 
   // Callback function - this is passed down into the AuthForm down below
@@ -40,4 +52,4 @@ class SignupForm extends Component {
   }
 }
 
-export default graphql(mutation)(SignupForm);
+export default graphql(query)(graphql(mutation)(SignupForm));
