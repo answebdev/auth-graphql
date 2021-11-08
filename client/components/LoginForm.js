@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { hashHistory } from 'react-router';
 import { graphql } from 'react-apollo';
 import AuthForm from './AuthForm';
 import mutation from '../mutations/Login';
@@ -14,6 +15,22 @@ class LoginForm extends Component {
     super(props);
 
     this.state = { errors: [] };
+  }
+
+  // Whenever component is about to rerender, for any reason, this 'componentWillUpdate' function will be called.
+  // 'nextProps' is the props object that will be placed on our component the next time that it rerenders,
+  // or as it's just about to update.
+  componentWillUpdate(nextProps) {
+    // The old, current set of props => this.props (this is the user before signing in)
+    // The next set of props that will be in place when the component rerenders => nextProps;
+
+    // console.log(this.props, nextProps);
+    // If the user did not exist before, and now they do (i.e., if the user was not signed in, but now is),
+    // then redirect to the dashboard
+    if (!this.props.data.user && nextProps.data.user) {
+      // Redirect to dashboard - do a forceful redirect:
+      hashHistory.push('/dashboard');
+    }
   }
 
   // Callback that is sent down to the <AuthForm /> component below.
@@ -51,4 +68,4 @@ class LoginForm extends Component {
     );
   }
 }
-export default graphql(mutation)(LoginForm);
+export default graphql(query)(graphql(mutation)(LoginForm));
