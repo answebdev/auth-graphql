@@ -12,6 +12,7 @@ import CurrentUser from '../queries/CurrentUser';
 // then we would also use this HOC in those components (i.e., Settings or Profile components).
 // And then in the routes (index.js), we would wrap those component with the 'requireAuth' HOC
 // the same way we wrap the Dashboard component (see index.js).
+// This would then require a user to be signed in if they want to access these routes.
 
 // Note: 'componentDidMount' is only called when a component is first rendered on the screen.
 // Note: 'componentWillUpdate' is called every single time that the query updates its state in any fashion.
